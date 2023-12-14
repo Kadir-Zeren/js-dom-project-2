@@ -24,6 +24,106 @@
       Aylık Gider Uygulaması
     </header>
 
+    <main class="container" style="max-width: 800px">
+      <form id="ekle-formu" class="d-flex gap-2">
+        <input
+          id="gelir-input"
+          class="form-control"
+          type="number"
+          min="0"
+          autofocus
+          placeholder="Gelirinizi giriniz."
+          required
+        />
+        <button id="ekle-btn" type="submit" class="btn btn-warning">
+          Ekle
+        </button>
+      </form>
+
+      <form id="harcama-formu" class="row g-3 p-3 mt-4 border rounded-4 m-0">
+        <h4 class="text-center">Harcama Formu</h4>
+        <div class="col-6">
+          <label for="harcama-alani" class="form-label">Harcama Alanı</label>
+          <input
+            type="text"
+            class="form-control"
+            id="harcama-alani"
+            placeholder="Manav, Bakkal, fatura"
+            required
+          />
+        </div>
+        <div class="col-6">
+          <label for="tarih" class="form-label">Tarih</label>
+          <input type="date" class="form-control" id="tarih" required />
+        </div>
+        <div class="col-12">
+          <label for="miktar" class="form-label">Harcanan Miktar</label>
+          <input
+            type="number"
+            class="form-control"
+            id="miktar"
+            placeholder="1000 ₺"
+            required
+          />
+        </div>
+
+        <div class="col-12 text-center">
+          <button id="kaydet" type="submit" class="btn btn-warning">
+            Kaydet
+          </button>
+        </div>
+      </form>
+
+      <table
+        id="harcama-tablosu"
+        class="table table-bordered table-hover table-striped mt-4 text-center"
+      >
+        <thead>
+          <tr>
+            <th scope="col" class="w-25">Tarih</th>
+            <th scope="col" class="w-50">Harcama Alanı</th>
+            <th scope="col">Miktar (₺)</th>
+            <th scope="col">İşlem</th>
+          </tr>
+        </thead>
+        <tbody id="harcama-body">
+          <!-- <tr>
+            <th scope="row">1</th>
+            <td>Mark</td>
+            <td>Otto</td>
+            <td>@mdo</td>
+          </tr> -->
+        </tbody>
+      </table>
+
+      <table
+        id="sonuc-tablosu"
+        class="table table-bordered table-hover table-striped mt-4 text-center w-50 ms-auto"
+      >
+        <tbody class="text-end">
+          <tr>
+            <th>Geliriniz:</th>
+            <td id="geliriniz">0</td>
+          </tr>
+          <tr>
+            <th>Gideriniz:</th>
+            <td id="gideriniz">0</td>
+          </tr>
+          <tr>
+            <th>Kalan:</th>
+            <td id="kalan">0</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <section class="text-center">
+        <button id="temizle-btn" class="btn btn-warning">
+          Bilgileri Temizle
+        </button>
+      </section>
+    </main>
+
     <script src="app.js"></script>
+    <!-- <script src="app_objesiz.js"></script> -->
   </body>
 </html>
