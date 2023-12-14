@@ -97,3 +97,48 @@ const hesaplaVeGuncelle = () => {
   giderinizTd.innerText = giderler;
   kalanTd.innerText = gelirler - giderler;
 };
+
+const harcamayiDomaYaz = ({ id, miktar, tarih, alan }) => {
+  // const { id, miktar, tarih, alan } = yeniHarcama
+  harcamaBody.innerHTML += `
+  <tr>
+    <td>${tarih}</td>
+    <td>${alan}</td>
+    <td>${miktar}</td>
+    <td><i id=${id} class="fa-solid fa-trash-can text-danger"  type="button"></i></td>
+  </tr>
+  `;
+};
+//! Harcama tablosunda herhangi bir alana tiklanildiginda calisir.
+harcamaBody.addEventListener("click", (e) => {
+  // console.log(e.target)
+
+  //? Tiklama sil butonlarindan geldi ise
+  if (e.target.classList.contains("fa-trash-can")) {
+    //? DOM'dan ilgili row'u sildik.
+    e.target.parentElement.parentElement.remove();
+
+    const id = e.target.id;
+    console.log(id);
+
+    //? Dizideki ilgili objeyi sildik.
+    harcamaListesi = harcamaListesi.filter((harcama) => harcama.id != id);
+
+    //? Silinmis yeni diziyi Local Storage aktardik.
+    localStorage.setItem("harcamalar", JSON.stringify(harcamaListesi));
+
+    //? her satir silindikten sonra yeni degerleri hesapla ve DOM'a yaz
+    hesaplaVeGuncelle();
+  }
+});
+
+//? temizle butonına basildigi zaman calis
+temizleBtn.addEventListener("click", () => {
+  if (confirm("Silmek istedigine emin misiniz?")) {
+    harcamaListesi = []; //? RAM'deki harcama listesini sil
+    gelirler = 0; //? RAM'deki gelirleri sil
+    localStorage.clear(); //? local straoge'daki tüm verileri sil
+    harcamaBody.innerHTML = ""; //? DOM'daki tüm harcamlar sil
+    hesaplaVeGuncelle(); //? sonuc tablosundaki (DOM) gelirler, giderler ve kalan degerleri sil.
+  }
+});
